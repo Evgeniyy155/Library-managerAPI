@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\GenreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,5 @@ Route::controller(AuthController::class)->group(function (){
 
 Route::apiResources([
     'genres' => GenreController::class,
+    'authors' => AuthorController::class
 ]);
