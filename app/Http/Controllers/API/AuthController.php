@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Data\LoginData;
-use App\Data\RegisterData;
+use App\Data\Auth\LoginData;
+use App\Data\Auth\RegisterData;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Data\LoginData;
-use App\Data\RegisterData;
+use App\Data\Auth\LoginData;
+use App\Data\Auth\RegisterData;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +14,7 @@ class UserService
     public function store(RegisterData $data): JsonResponse
     {
         User::query()->create($data->toArray());
-        return responseSuccess('User registered successfully');
+        return responseSuccess('User registered successfully', status: 201);
     }
 
     public function login(LoginData $data): JsonResponse

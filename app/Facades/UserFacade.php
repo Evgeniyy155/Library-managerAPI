@@ -2,8 +2,8 @@
 
 namespace App\Facades;
 
-use App\Data\LoginData;
-use App\Data\RegisterData;
+use App\Data\Auth\LoginData;
+use App\Data\Auth\RegisterData;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
