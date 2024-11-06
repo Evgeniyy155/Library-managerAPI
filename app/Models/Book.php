@@ -12,7 +12,7 @@ class Book extends Model
     /** @use HasFactory<\Database\Factories\BookFactory> */
     use HasFactory;
 
-    protected $fillable = ['genre_id', 'title', 'published_year', 'isbn'];
+    protected $fillable = ['genre_id', 'title', 'published_year', 'isbn', 'status'];
 
     public function genre(): BelongsTo
     {

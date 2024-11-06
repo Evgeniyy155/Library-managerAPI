@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\GenreController;
+use App\Http\Controllers\API\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,6 @@ Route::apiResources([
     'authors' => AuthorController::class,
     'books' => BookController::class
 ]);
+
+Route::apiResource('reservations', ReservationController::class)
+    ->except('update')->middleware('auth:sanctum');

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\BookService;
+use App\Services\ReservationService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind('bookService', function (){
             return new BookService();
+        });
+        $this->app->bind('reservationService', function (){
+            return new ReservationService();
         });
     }
 
