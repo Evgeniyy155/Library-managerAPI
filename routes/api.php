@@ -29,7 +29,7 @@ Route::apiResources([
 Route::apiResource('reservations', ReservationController::class)
     ->except('update')->middleware('auth:sanctum');
 
-Route::controller(IssuanceController::class)->group(function (){
+Route::controller(IssuanceController::class)->middleware(['auth:sanctum', 'staffRoleOnly'])->group(function (){
     Route::post('/issuances/{reservation}', 'store')->name('issuances.store');
     Route::put('/issuances/{issuance}/return', 'return')->name('issuances.return');
 });
