@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\GenreController;
+use App\Http\Controllers\API\IssuanceController;
 use App\Http\Controllers\API\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,8 @@ Route::apiResources([
 
 Route::apiResource('reservations', ReservationController::class)
     ->except('update')->middleware('auth:sanctum');
+
+Route::controller(IssuanceController::class)->group(function (){
+    Route::post('/issuances/{reservation}', 'store')->name('issuances.store');
+    Route::put('/issuances/{issuance}/return', 'return')->name('issuances.return');
+});

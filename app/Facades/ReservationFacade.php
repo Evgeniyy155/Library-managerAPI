@@ -2,9 +2,7 @@
 
 namespace App\Facades;
 
-use App\Data\Book\BookRequestData;
 use App\Data\Reservation\ReservationRequestData;
-use App\Models\Book;
 use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
