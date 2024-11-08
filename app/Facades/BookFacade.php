@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static list()
+ * @method static JsonResponse list()
  * @method static JsonResponse create(BookRequestData $data)
  * @method static show(Book $book)
  * @method static JsonResponse update(BookRequestData $data, Book $book)

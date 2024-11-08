@@ -4,15 +4,15 @@ namespace App\Services;
 
 use App\Data\Book\BookData;
 use App\Data\Book\BookRequestData;
+use App\Helpers\PaginationHelper;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
-use Spatie\LaravelData\DataCollection;
 
 class BookService
 {
-    public function list()
+    public function list(): JsonResponse
     {
-        return BookData::collect(Book::all(), DataCollection::class);
+        return BookData::toPaginatedJsonResponse(Book::query()->paginate(PaginationHelper::getPerPage()));
     }
 
 

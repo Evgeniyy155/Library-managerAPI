@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 class BookController extends Controller
 {
 
-    public function index()
+    public function index(): JsonResponse
     {
         return BookFacade::list();
     }

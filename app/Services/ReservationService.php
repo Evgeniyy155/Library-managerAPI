@@ -5,17 +5,18 @@ namespace App\Services;
 use App\Data\Reservation\ReservationData;
 use App\Data\Reservation\ReservationRequestData;
 use App\Enums\BookStatus;
+use App\Helpers\PaginationHelper;
 use App\Models\Book;
 use App\Models\Reservation;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
-use Spatie\LaravelData\DataCollection;
 
 class ReservationService
 {
-    public function list()
+    public function list(): JsonResponse
     {
-        return ReservationData::collect(Reservation::all(), DataCollection::class);
+        return ReservationData::toPaginatedJsonResponse(Reservation::query()->paginate(PaginationHelper::getPerPage()));
     }
 
     public function create(ReservationRequestData $data, User $user)

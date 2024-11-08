@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static list()
+ * @method static JsonResponse list()
  * @method static JsonResponse create(ReservationRequestData $data, User $user)
  * @method static show(Reservation $reservation)
  * @method static JsonResponse delete(Reservation $reservation)

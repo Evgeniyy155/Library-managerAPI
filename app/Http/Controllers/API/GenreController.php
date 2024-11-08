@@ -4,16 +4,16 @@ namespace App\Http\Controllers\API;
 
 use App\Data\Genre\GenreData;
 use App\Data\Genre\GenreRequestData;
+use App\Helpers\PaginationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Genre;
 use Illuminate\Http\JsonResponse;
-use Spatie\LaravelData\DataCollection;
 
 class GenreController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        return GenreData::collect(Genre::all(), DataCollection::class);
+        return GenreData::toPaginatedJsonResponse(Genre::query()->paginate(PaginationHelper::getPerPage()));
     }
 
     public function store(GenreRequestData $data): JsonResponse

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Data\Author\AuthorData;
 use App\Data\Author\AuthorRequestData;
+use App\Helpers\PaginationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Http\JsonResponse;
@@ -12,9 +13,9 @@ use Spatie\LaravelData\DataCollection;
 
 class AuthorController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        return AuthorData::collect(Author::all(), DataCollection::class);
+        return AuthorData::toPaginatedJsonResponse(Author::query()->paginate(PaginationHelper::getPerPage()));
     }
 
     public function store(AuthorRequestData $data): JsonResponse
