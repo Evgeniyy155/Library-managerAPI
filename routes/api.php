@@ -6,6 +6,7 @@ use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\GenreController;
 use App\Http\Controllers\API\IssuanceController;
 use App\Http\Controllers\API\ReservationController;
+use App\Http\Controllers\API\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
@@ -35,4 +36,12 @@ Route::apiResource('reservations', ReservationController::class)
 Route::controller(IssuanceController::class)->middleware(['auth:sanctum', 'staffRoleOnly'])->group(function () {
     Route::post('/issuances/{reservation}', 'store')->name('issuances.store');
     Route::put('/issuances/{issuance}/return', 'return')->name('issuances.return');
+});
+
+Route::controller(ReviewController::class)->middleware('auth:sanctum')->as('reviews.')->group(function (){
+    Route::get('/{type}/{id}/reviews', 'index')->name('index');
+    Route::post('/{type}/{id}/reviews', 'store')->name('store');
+    Route::get('/reviews/{review}', 'show')->name('show');
+    Route::put('/reviews/{review}', 'update')->name('update');
+    Route::delete('/reviews/{review}', 'destroy')->name('delete');
 });

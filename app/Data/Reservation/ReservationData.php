@@ -3,6 +3,7 @@
 namespace App\Data\Reservation;
 
 use App\Data\Book\BookData;
+use App\Data\User\UserData;
 use App\Traits\PaginationDataTrait;
 use Carbon\Carbon;
 use Spatie\LaravelData\Attributes\LoadRelation;
@@ -15,6 +16,8 @@ class ReservationData extends Data
     use PaginationDataTrait;
     public function __construct(
         public int $id,
+        #[LoadRelation]
+        public UserData $user,
         public int $user_id,
         #[LoadRelation]
         public BookData $book,
