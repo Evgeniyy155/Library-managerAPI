@@ -42,6 +42,8 @@ Route::controller(ReviewController::class)->middleware('auth:sanctum')->as('revi
     Route::get('/{type}/{id}/reviews', 'index')->name('index');
     Route::post('/{type}/{id}/reviews', 'store')->name('store');
     Route::get('/reviews/{review}', 'show')->name('show');
-    Route::put('/reviews/{review}', 'update')->name('update');
-    Route::delete('/reviews/{review}', 'destroy')->name('delete');
+    Route::put('/reviews/{review}', 'update')
+        ->middleware('can:update,review')->name('update');
+    Route::delete('/reviews/{review}', 'destroy')
+        ->middleware('can:destroy,review')->name('delete');
 });
