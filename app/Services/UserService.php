@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Data\Auth\LoginData;
 use App\Data\Auth\RegisterData;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -13,7 +14,8 @@ class UserService
 {
     public function store(RegisterData $data): JsonResponse
     {
-        User::query()->create($data->toArray());
+        $user = User::query()->create($data->toArray());
+        event(new Registered($user));
         return responseSuccess('User registered successfully', status: 201);
     }
 

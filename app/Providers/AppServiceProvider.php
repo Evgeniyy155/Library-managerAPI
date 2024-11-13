@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Review;
 use App\Policies\ReviewPolicy;
 use App\Services\BookService;
+use App\Services\EmailVerificationService;
 use App\Services\IssuanceService;
 use App\Services\ReservationService;
 use App\Services\ReviewService;
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind('reviewService', function (){
             return new ReviewService();
+        });
+        $this->app->bind('emailVerificationService', function (){
+            return new EmailVerificationService();
         });
     }
 

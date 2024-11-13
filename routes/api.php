@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AuthorController;
 use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\EmailVerificationController;
 use App\Http\Controllers\API\GenreController;
 use App\Http\Controllers\API\IssuanceController;
 use App\Http\Controllers\API\ReservationController;
@@ -46,4 +47,11 @@ Route::controller(ReviewController::class)->middleware('auth:sanctum')->as('revi
         ->middleware('can:update,review')->name('update');
     Route::delete('/reviews/{review}', 'destroy')
         ->middleware('can:destroy,review')->name('delete');
+});
+
+Route::controller(EmailVerificationController::class)->as('verification.')->prefix('email')
+    ->middleware('auth:sanctum')
+    ->group(function (){
+   Route::get('/verify', 'notice')->name('notice');
+   Route::get('/verification-notification', 'resend')->middleware('throttle:3,1')->name('send');
 });
