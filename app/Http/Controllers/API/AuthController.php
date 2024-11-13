@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Data\Auth\LoginData;
 use App\Data\Auth\RegisterData;
+use App\Data\User\UserData;
 use App\Facades\UserFacade;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -24,5 +25,10 @@ class AuthController extends Controller
     public function logout(Request $request): JsonResponse
     {
         return UserFacade::logout($request->user());
+    }
+
+    public function show(Request $request)
+    {
+        return UserData::from($request->user())->wrap('user');
     }
 }

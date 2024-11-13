@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register')->name('register');
     Route::post('/login', 'login')->name('login');
-    Route::post('/logout', 'logout')->name('logout')
-        ->middleware('auth:sanctum');
+    Route::middleware('auth:sanctum')->group(function (){
+        Route::post('/logout', 'logout')->name('logout');
+        Route::get('/user', 'show')->name('user.show');
+    });
 });
 
 Route::middleware(['auth:sanctum', 'staffRoleOnly'])->group(function () {
@@ -22,7 +24,7 @@ Route::middleware(['auth:sanctum', 'staffRoleOnly'])->group(function () {
         'genres' => GenreController::class,
         'authors' => AuthorController::class,
         'books' => BookController::class
-    ], ['only' => ['store', 'update', 'delete']]);
+    ], ['only' => ['store', 'update', 'destroy']]);
 });
 
 Route::apiResources([
@@ -39,7 +41,7 @@ Route::controller(IssuanceController::class)->middleware(['auth:sanctum', 'staff
     Route::put('/issuances/{issuance}/return', 'return')->name('issuances.return');
 });
 
-Route::controller(ReviewController::class)->middleware('auth:sanctum')->as('reviews.')->group(function (){
+Route::controller(ReviewController::class)->middleware('auth:sanctum')->as('reviews.')->group(function () {
     Route::get('/{type}/{id}/reviews', 'index')->name('index');
     Route::post('/{type}/{id}/reviews', 'store')->name('store');
     Route::get('/reviews/{review}', 'show')->name('show');
@@ -51,7 +53,7 @@ Route::controller(ReviewController::class)->middleware('auth:sanctum')->as('revi
 
 Route::controller(EmailVerificationController::class)->as('verification.')->prefix('email')
     ->middleware('auth:sanctum')
-    ->group(function (){
-   Route::get('/verify', 'notice')->name('notice');
-   Route::get('/verification-notification', 'resend')->middleware('throttle:3,1')->name('send');
-});
+    ->group(function () {
+        Route::get('/verify', 'notice')->name('notice');
+        Route::get('/verification-notification', 'resend')->middleware('throttle:3,1')->name('send');
+    });
